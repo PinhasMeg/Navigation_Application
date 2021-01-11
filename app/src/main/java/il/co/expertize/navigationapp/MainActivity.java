@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String clientEmail;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        clientEmail = getIntent().getStringExtra("ClientEmail");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
