@@ -92,11 +92,15 @@ public class LoginActivity extends AppCompatActivity implements
 
                             // update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            user.sendEmailVerification();
-                            updateUI(user);
+                            try {
+                                user.sendEmailVerification();
+                            }catch(Exception ignored){ };
+                            Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("myEmail",user.getEmail());
                             startActivity(intent);
+
+
                         } else {
                             Log.e(TAG, "createAccount: Fail!", task.getException());
                             Toast.makeText(getApplicationContext(), "Authentication failed!", Toast.LENGTH_SHORT).show();
@@ -142,33 +146,33 @@ public class LoginActivity extends AppCompatActivity implements
         updateUI(null);
     }
 
-    private void sendEmailVerification() {
-        // Disable Verify Email button
-//        findViewById(R.id.btn_verify_email).setEnabled(false);
-
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // Re-enable Verify Email button
-//                        findViewById(R.id.btn_verify_email).setEnabled(true);
-
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Verification email sent to " + user.getEmail(), Toast.LENGTH_SHORT).show();
-                            if (user.isEmailVerified())
-                            {
-                                // user is verified, so you can finish this activity or send user to activity which you want.
-                                // finish();
-                                Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Log.e(TAG, "sendEmailVerification failed!", task.getException());
-                            Toast.makeText(getApplicationContext(), "Failed to send verification email.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
+//    private void sendEmailVerification() {
+//        // Disable Verify Email button
+////        findViewById(R.id.btn_verify_email).setEnabled(false);
+//
+//        final FirebaseUser user = mAuth.getCurrentUser();
+//        user.sendEmailVerification()
+//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        // Re-enable Verify Email button
+////                        findViewById(R.id.btn_verify_email).setEnabled(true);
+//
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(getApplicationContext(), "Verification email sent to " + user.getEmail(), Toast.LENGTH_SHORT).show();
+//                            if (user.isEmailVerified())
+//                            {
+//                                // user is verified, so you can finish this activity or send user to activity which you want.
+//                                // finish();
+//                                Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+//                            }
+//                        } else {
+//                            Log.e(TAG, "sendEmailVerification failed!", task.getException());
+//                            Toast.makeText(getApplicationContext(), "Failed to send verification email.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//    }
 
     private boolean validateForm(String email, String password) {
 
