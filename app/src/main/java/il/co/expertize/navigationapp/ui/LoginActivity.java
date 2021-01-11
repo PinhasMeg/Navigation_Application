@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements
         findViewById(R.id.btn_email_sign_in).setOnClickListener(this);
         findViewById(R.id.btn_email_create_account).setOnClickListener(this);
         findViewById(R.id.btn_sign_out).setOnClickListener(this);
-        findViewById(R.id.btn_verify_email).setOnClickListener(this);
+//        findViewById(R.id.btn_verify_email).setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -65,13 +65,16 @@ public class LoginActivity extends AppCompatActivity implements
 
         if (i == R.id.btn_email_create_account) {
             createAccount(edtEmail.getText().toString(), edtPassword.getText().toString());
+
+
         } else if (i == R.id.btn_email_sign_in) {
             signIn(edtEmail.getText().toString(), edtPassword.getText().toString());
         } else if (i == R.id.btn_sign_out) {
             signOut();
-        } else if (i == R.id.btn_verify_email) {
-            sendEmailVerification();
         }
+//        else if (i == R.id.btn_verify_email) {
+//            sendEmailVerification();
+//        }
     }
 
     private void createAccount(String email, String password) {
@@ -89,6 +92,7 @@ public class LoginActivity extends AppCompatActivity implements
 
                             // update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+                            user.sendEmailVerification();
                             updateUI(user);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("myEmail",user.getEmail());
@@ -100,6 +104,8 @@ public class LoginActivity extends AppCompatActivity implements
                         }
                     }
                 });
+
+
     }
 
     private void signIn(String email, String password) {
@@ -138,7 +144,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void sendEmailVerification() {
         // Disable Verify Email button
-        findViewById(R.id.btn_verify_email).setEnabled(false);
+//        findViewById(R.id.btn_verify_email).setEnabled(false);
 
         final FirebaseUser user = mAuth.getCurrentUser();
         user.sendEmailVerification()
@@ -146,7 +152,7 @@ public class LoginActivity extends AppCompatActivity implements
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         // Re-enable Verify Email button
-                        findViewById(R.id.btn_verify_email).setEnabled(true);
+//                        findViewById(R.id.btn_verify_email).setEnabled(true);
 
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Verification email sent to " + user.getEmail(), Toast.LENGTH_SHORT).show();
