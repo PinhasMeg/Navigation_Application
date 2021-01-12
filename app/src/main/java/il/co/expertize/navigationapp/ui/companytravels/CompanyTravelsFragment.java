@@ -1,4 +1,4 @@
-package il.co.expertize.navigationapp.ui.gallery;
+package il.co.expertize.navigationapp.ui.companytravels;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import il.co.expertize.navigationapp.R;
 
-public class GalleryFragment extends Fragment {
+public class CompanyTravelsFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private CompanyTravelsViewModel companyTravelsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        companyTravelsViewModel =
+                new ViewModelProvider(this).get(CompanyTravelsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_companytravels, container, false);
+        final TextView textView = root.findViewById(R.id.text_companytravels);
+        companyTravelsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

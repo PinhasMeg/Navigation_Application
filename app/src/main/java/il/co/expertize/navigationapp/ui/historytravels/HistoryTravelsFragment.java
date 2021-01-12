@@ -1,4 +1,4 @@
-package il.co.expertize.navigationapp.ui.slideshow;
+package il.co.expertize.navigationapp.ui.historytravels;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import il.co.expertize.navigationapp.R;
 
-public class SlideshowFragment extends Fragment {
+public class HistoryTravelsFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private HistoryTravelsViewModel historyTravelsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        historyTravelsViewModel =
+                new ViewModelProvider(this).get(HistoryTravelsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_historytravels, container, false);
+        final TextView textView = root.findViewById(R.id.text_historytravels);
+        historyTravelsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
