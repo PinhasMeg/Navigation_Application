@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AndroidApplicationJava</string>
+    <string name="Send_Request">Send Request</string>
+    <string name="MsgInfo">Please enter the following informations about your reservation:</string>
+    <string name="Name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="button1">Add Travel Activity</string>
+    <string name="button2">History Travels Activity</string>
+    <string name="Phonenumber">Phone number:</string>
+    <string name="DepartureAddress">Departure address:</string>
+    <string name="DestinationAddress">Destination address:</string>
+    <string name="numOfPassengers">Number of passengers:</string>
+    <string name="DepartureDate">Departure date</string>
+    <string name="ReturnDate">Return Date date</string>
+    <string name="DepartureDateTextView">Departure date:</string>
+    <string name="ReturnDateTextView">Return date:</string>
+</resources>

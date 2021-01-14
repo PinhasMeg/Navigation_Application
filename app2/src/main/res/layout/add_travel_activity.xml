@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.AddTravelActivity">
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="349dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="23dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/MsgInfo"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="@string/Name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:autofillHints="" />
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:hint="@string/email"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:autofillHints="" />
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:hint="@string/Phonenumber"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:autofillHints="" />
+            <EditText
+                android:id="@+id/DepartureAddress"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:hint="@string/DepartureAddress"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:autofillHints="" />
+            <EditText
+                android:id="@+id/DestinationAddress"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:hint="@string/DestinationAddress"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:autofillHints="" />
+            <EditText
+                android:id="@+id/numOfPassengers"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:hint="@string/numOfPassengers"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:autofillHints="" />
+
+            <TextView
+                android:id="@+id/DepartureDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/DepartureDateTextView"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <DatePicker
+                android:id="@+id/DepartureDate"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:startYear="2020"
+                android:endYear="2050"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:autofillHints="" />
+
+            <TextView
+                android:id="@+id/ReturnDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/ReturnDateTextView"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <DatePicker
+                android:id="@+id/ReturnDate"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:autofillHints=""
+                android:startYear="2020"
+                android:endYear="2050"/>
+
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/Send_Request"
+                android:onClick="SendRequest"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </TableLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
