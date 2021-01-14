@@ -1,6 +1,7 @@
 package il.co.expertize.navigationapp.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,17 +28,20 @@ public class LoginActivity extends AppCompatActivity implements
         View.OnClickListener {
 
     private static final String TAG = "FirebaseEmailPassword";
-
+    public SharedPreferences sharedPreferences ;
 
     private EditText edtEmail;
     private EditText edtPassword;
     public boolean flag = false;
     private FirebaseAuth mAuth;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_password);
+
+        sharedPreferences = getSharedPreferences("USER",MODE_PRIVATE);
 
         edtEmail = (EditText) findViewById(R.id.edt_email);
         edtPassword = (EditText) findViewById(R.id.edt_password);
@@ -71,6 +75,9 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void createAccount(String email, String password) {
         Log.e(TAG, "createAccount:" + email);
+
+        sharedPreferences.edit().putString("Email",email).putString("Password",password).apply();
+
         if (!validateForm(email, password)) {
             return;
         }
@@ -81,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements
                         FirebaseUser user = mAuth.getCurrentUser();
                         sendEmailVerification(user);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("ClientEmail", user.getEmail());
+                        //intent.putExtra("ClientEmail", user.getEmail());
                         startActivity(intent);
                     } else {
                         Log.e(TAG, "createAccount: Fail!", task.getException());
@@ -92,6 +99,9 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void signIn(String email, String password) {
         Log.e(TAG, "signIn:" + email);
+
+        sharedPreferences.edit().putString("Email",email).putString("Password",password).apply();
+
         if (!validateForm(email, password)) {
             return;
         }
@@ -105,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("ClientEmail",user.getEmail());
+                            //intent.putExtra("ClientEmail",user.getEmail());
                             startActivity(intent);
                         } else {
                             Log.e(TAG, "signIn: Fail!", task.getException());
@@ -117,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void signOut() {
         mAuth.signOut();
+        editor.clear().commit();
     }
 
     private void sendEmailVerification(@NotNull FirebaseUser user) {
