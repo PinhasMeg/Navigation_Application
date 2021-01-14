@@ -23,7 +23,7 @@ public class HistoryTravelsFragment extends Fragment {
         historyTravelsViewModel =
                 new ViewModelProvider(this).get(HistoryTravelsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_historytravels, container, false);
-        final TextView textView = root.findViewById(R.id.text_historytravels);
+        final TextView textView = root.findViewById(R.id.list_view_items_historytravels);
         historyTravelsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

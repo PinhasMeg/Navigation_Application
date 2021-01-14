@@ -18,7 +18,7 @@ public class RegisteredTravelsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         RegisteredTravelsViewModel registeredTravelsViewModel = new ViewModelProvider(this).get(RegisteredTravelsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_registeredtravels, container, false);
-        final TextView textView = root.findViewById(R.id.text_registeredtravels);
+        final TextView textView = root.findViewById(R.id.list_view_items_registeredtravels);
 
         registeredTravelsViewModel.getText().observe(getViewLifecycleOwner(), s -> {
             textView.setText(s);

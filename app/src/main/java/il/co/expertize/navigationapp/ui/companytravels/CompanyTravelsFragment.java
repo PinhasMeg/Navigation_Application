@@ -23,7 +23,7 @@ public class CompanyTravelsFragment extends Fragment {
         companyTravelsViewModel =
                 new ViewModelProvider(this).get(CompanyTravelsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_companytravels, container, false);
-        final TextView textView = root.findViewById(R.id.text_companytravels);
+        final TextView textView = root.findViewById(R.id.list_view_items_companytravels);
         companyTravelsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

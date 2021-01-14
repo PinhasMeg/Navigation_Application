@@ -21,7 +21,7 @@
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ListView
-        android:id="@+id/list_view_items"
+        android:id="@+id/list_view_items_historytravels"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"

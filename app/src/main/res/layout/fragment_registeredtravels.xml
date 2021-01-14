@@ -22,7 +22,7 @@
 
 
     <ListView
-        android:id="@+id/list_view_items"
+        android:id="@+id/list_view_items_registeredtravels"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
