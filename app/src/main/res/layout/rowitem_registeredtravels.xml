@@ -11,6 +11,7 @@
         android:orientation="horizontal">
 
         <TextView
+
             android:id="@+id/clientName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,18 +149,19 @@ android:orientation="horizontal">
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/Accepted_society"
-            android:text="Hire society"
-            android:textSize="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <Button
             android:id="@+id/Accepted_travel"
             android:text="Start travel"
             android:textSize="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/Accepted_society"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Hire society"
+            android:textSize="10dp" />
+
         <Button
         android:id="@+id/Finished_travel"
         android:text="Finish travel"
