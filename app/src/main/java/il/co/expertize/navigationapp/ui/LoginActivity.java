@@ -28,12 +28,12 @@ public class LoginActivity extends AppCompatActivity implements
         View.OnClickListener {
 
     private static final String TAG = "FirebaseEmailPassword";
-    public SharedPreferences sharedPreferences ;
+    public static SharedPreferences sharedPreferences ;
 
     private EditText edtEmail;
     private EditText edtPassword;
     public boolean flag = false;
-    private FirebaseAuth mAuth;
+    private static FirebaseAuth mAuth;
     SharedPreferences.Editor editor;
 
     @Override
@@ -43,6 +43,11 @@ public class LoginActivity extends AppCompatActivity implements
 
         sharedPreferences = getSharedPreferences("USER",MODE_PRIVATE);
 
+        if(sharedPreferences.contains("Email"))
+        {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
         edtEmail = (EditText) findViewById(R.id.edt_email);
         edtPassword = (EditText) findViewById(R.id.edt_password);
 
@@ -56,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d("ok", "start");
         findViewById(R.id.email_password_buttons).setVisibility(View.VISIBLE);
         findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
         findViewById(R.id.layout_signed_in_buttons).setVisibility(View.GONE);
@@ -75,9 +81,6 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void createAccount(String email, String password) {
         Log.e(TAG, "createAccount:" + email);
-
-        sharedPreferences.edit().putString("Email",email).putString("Password",password).apply();
-
         if (!validateForm(email, password)) {
             return;
         }
@@ -85,10 +88,10 @@ public class LoginActivity extends AppCompatActivity implements
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.e(TAG, "createAccount: Success!");
+                        sharedPreferences.edit().putString("Email",email).putString("Password",password).apply();
                         FirebaseUser user = mAuth.getCurrentUser();
                         sendEmailVerification(user);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        //intent.putExtra("ClientEmail", user.getEmail());
                         startActivity(intent);
                     } else {
                         Log.e(TAG, "createAccount: Fail!", task.getException());
@@ -99,9 +102,6 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void signIn(String email, String password) {
         Log.e(TAG, "signIn:" + email);
-
-        sharedPreferences.edit().putString("Email",email).putString("Password",password).apply();
-
         if (!validateForm(email, password)) {
             return;
         }
@@ -112,10 +112,9 @@ public class LoginActivity extends AppCompatActivity implements
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.e(TAG, "signIn: Success!");
-
+                            sharedPreferences.edit().putString("Email",email).putString("Password",password).apply();
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            //intent.putExtra("ClientEmail",user.getEmail());
                             startActivity(intent);
                         } else {
                             Log.e(TAG, "signIn: Fail!", task.getException());
@@ -125,9 +124,9 @@ public class LoginActivity extends AppCompatActivity implements
                 });
     }
 
-    private void signOut() {
+    public static void signOut() {
         mAuth.signOut();
-        editor.clear().commit();
+        sharedPreferences.edit().clear().apply();
     }
 
     private void sendEmailVerification(@NotNull FirebaseUser user) {

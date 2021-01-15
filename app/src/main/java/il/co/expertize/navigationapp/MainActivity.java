@@ -1,8 +1,11 @@
 package il.co.expertize.navigationapp;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,10 +20,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import il.co.expertize.navigationapp.ui.LoginActivity;
+
 public class MainActivity extends AppCompatActivity {
 
-    public static String clientEmail;
+    public String clientEmail;
     private AppBarConfiguration mAppBarConfiguration;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        clientEmail = getIntent().getStringExtra("ClientEmail");
-
+        //clientEmail = getIntent().getStringExtra("ClientEmail");
+        sharedPreferences = getSharedPreferences("USER",MODE_PRIVATE);
+        clientEmail = sharedPreferences.getString("Email", "");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         TextView clientEmailWelcome = (TextView) headerView.findViewById(R.id.userTextView);
+        Button signOut = (Button) headerView.findViewById(R.id.sign_out_button);
+        signOut.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                LoginActivity.signOut();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         clientEmailWelcome.setText(clientEmail);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
