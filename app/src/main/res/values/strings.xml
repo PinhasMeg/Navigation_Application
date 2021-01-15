@@ -25,4 +25,9 @@
     <string name="start_travel">Start travel</string>
     <string name="hire_society">Hire society</string>
     <string name="finish_travel">Finish travel</string>
+    <string name="call">Call</string>
+    <string name="validate">Validate</string>
+    <string name="send_mail">Send Mail</string>
+    <string name="destination">Destination</string>
+    <string name="address">Address</string>
 </resources>
