@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -56,7 +57,7 @@ public class CustomListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.rowitem_companyTravels, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.rowitem_registeredtravels, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else
@@ -66,19 +67,19 @@ public class CustomListAdapter extends BaseAdapter {
 
         Travel currentItem = (Travel) getItem(position);
         viewHolder.clientName.setText(currentItem.getClientName());
-        viewHolder.clientPhone.setText(currentItem.getClientPhone());
-        viewHolder.clientEmail.setText(currentItem.getClientEmail());
-
-
+        viewHolder.numOfPassengers.setText(currentItem.getClientPhone());
+        viewHolder.beginDate.setText(currentItem.getClientEmail());
+        viewHolder.endDate.setText(currentItem.getClientEmail());
+        viewHolder.applicationDate.setText(currentItem.getClientEmail());
 
         //viewHolder.call.setTag(R.integer.call_view, convertView);
-        viewHolder.call.setTag(R.integer.call_pos, position);
-        viewHolder.call.setOnClickListener(new View.OnClickListener() {
+        viewHolder.hireSociety.setTag(R.integer.hireSociety_pos, position);
+        viewHolder.hireSociety.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //    View tempview = (View) viewHolder.call.getTag(R.integer.call_view);
-                Integer pos = (Integer) viewHolder.call.getTag(R.integer.call_pos);
+                Integer pos = (Integer) viewHolder.hireSociety.getTag(R.integer.hireSociety_pos);
                 if (listener!=null)
                     listener.onButtonClicked(pos,view);
             }
@@ -86,13 +87,26 @@ public class CustomListAdapter extends BaseAdapter {
 
 
         //  viewHolder.update.setTag(R.integer.update_view, convertView);
-        viewHolder.update.setTag(R.integer.update_pos, position);
-        viewHolder.update.setOnClickListener(new View.OnClickListener() {
+        viewHolder.startTravel.setTag(R.integer.startTravel_pos, position);
+        viewHolder.startTravel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
-                Integer pos = (Integer) viewHolder.update.getTag(R.integer.update_pos);
+                Integer pos = (Integer) viewHolder.startTravel.getTag(R.integer.startTravel_pos);
+                if (listener!=null)
+                    listener.onButtonClicked(pos,view);
+            }
+        });
+
+        //  viewHolder.update.setTag(R.integer.update_view, convertView);
+        viewHolder.finishTravel.setTag(R.integer.finishTravel_pos, position);
+        viewHolder.finishTravel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
+                Integer pos = (Integer) viewHolder.finishTravel.getTag(R.integer.finishTravel_pos);
                 if (listener!=null)
                     listener.onButtonClicked(pos,view);
             }
@@ -102,19 +116,27 @@ public class CustomListAdapter extends BaseAdapter {
     }
 
     //ViewHolder inner class
-    private class ViewHolder {
+    private static class ViewHolder {
         TextView clientName;
-        TextView clientPhone;
-        TextView clientEmail;
-        Button  call;
-        Button update;
+        TextView numOfPassengers;
+        TextView beginDate;
+        TextView endDate;
+        TextView applicationDate;
+        Button  hireSociety;
+        Button startTravel;
+        Button finishTravel;
+        Spinner companiesSpinner;
 
         public ViewHolder(View view) {
             clientName = (TextView)view.findViewById(R.id.clientName);
-            clientPhone = (TextView) view.findViewById(R.id.clientPhone);
-            clientEmail = (TextView) view.findViewById(R.id.clientEmail);
-            call=(Button)view.findViewById(R.id.bt_call);
-            update=(Button)view.findViewById(R.id.bt_update);
+            numOfPassengers = (TextView) view.findViewById(R.id.num_of_passengers);
+            beginDate = (TextView) view.findViewById(R.id.begin_date);
+            endDate = (TextView) view.findViewById(R.id.end_date);
+            applicationDate = (TextView) view.findViewById(R.id.application_date);
+            hireSociety=(Button)view.findViewById(R.id.accepted_travel);
+            startTravel=(Button)view.findViewById(R.id.travel_start);
+            finishTravel=(Button)view.findViewById(R.id.travel_finish);
+            companiesSpinner = (Spinner)view.findViewById(R.id.travel_companies_spinner);
         }
     }
 }

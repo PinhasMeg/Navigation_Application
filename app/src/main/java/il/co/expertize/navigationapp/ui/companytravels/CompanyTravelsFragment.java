@@ -56,17 +56,17 @@ public class CompanyTravelsFragment extends Fragment {
         mViewModel.getAllTravels().observe(getViewLifecycleOwner(), new Observer<List<Travel>>() {
             @Override
             public void onChanged(List<Travel> travels) {
-                ArrayList<Travel> tmp = new ArrayList<Travel>(travels);
+                ArrayList<Travel> travelArrayList = new ArrayList<Travel>(travels);
 
                 //create adapter object
-                CustomListAdapter adapter = new CustomListAdapter(context, tmp);
+                CustomListAdapter adapter = new CustomListAdapter(context, travelArrayList);
 
 
                 adapter.setListener(new CustomListAdapter.CompanyTravelListener() {
                     @Override
                     public void onButtonClicked(int position, View view) {
                         if (view.getId() == R.id.bt_call) {
-                            String phone = tmp.get(position).getClientPhone();
+                            String phone = travelArrayList.get(position).getClientPhone();
 
                             if (phone.isEmpty()) {
                                 Toast.makeText(getContext(), "no phone number exist", Toast.LENGTH_LONG).show();
@@ -78,7 +78,7 @@ public class CompanyTravelsFragment extends Fragment {
                             startActivity(callIntent);
                         }
                         if (view.getId() == R.id.bt_update) {
-                            mViewModel.updateTravel(tmp.get(position));
+                            mViewModel.updateTravel(travelArrayList.get(position));
                         }
                     }
                 });
