@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import il.co.expertize.navigationapp.Model.Travel;
 import il.co.expertize.navigationapp.R;
@@ -57,7 +56,7 @@ public class CustomListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.rowitem_registeredtravels, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.rowitem_companyTravels, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else

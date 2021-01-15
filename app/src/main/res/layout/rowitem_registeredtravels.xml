@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="2"
         android:orientation="horizontal">
 
@@ -19,52 +19,159 @@
             android:layout_weight="1"
             android:baselineAligned="false"
             android:padding="8dp"
-            android:textSize="16sp" />
+            android:text="Name"
+            android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/clientPhone"
+            android:id="@+id/theName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:padding="8dp"
-            android:textSize="16sp" />
+            android:baselineAligned="false"
+            android:padding="8dp" />
 
-        <TextView
-            android:id="@+id/clientEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:textSize="16sp" />
+
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/bt_call"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/Begin_date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="CALL" />
+            android:padding="8dp"
+            android:text="Date of departure"
+            android:textSize="9dp" />
+      <TextView
+        android:id="@+id/the_Begin_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:padding="8dp" />
+  </LinearLayout>
 
-        <Button
-            android:id="@+id/bt_update"
-            android:layout_width="wrap_content"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <TextView
+            android:id="@+id/End_date"
+            android:text="End date"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="UPDATE" />
+            android:padding="8dp"
+            android:textSize="10sp" />
+    <TextView
+        android:id="@+id/the_End_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="1"
+        android:padding="8dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/Num_of_passengers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:text="Number of passengers"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/the_Num_of_passengers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:padding="8dp" />
 </LinearLayout>
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal">
+<TextView
+            android:id="@+id/Application_date"
+            android:text="Date of application"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textSize="10dp" />
+    <TextView
+        android:id="@+id/the_Application_date"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:padding="8dp" />
+</LinearLayout>
+
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/Travel_society"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/Accepted_society"
+            android:text="Hire society"
+            android:textSize="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/Accepted_travel"
+            android:text="Start travel"
+            android:textSize="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <Button
+        android:id="@+id/Finished_travel"
+        android:text="Finish travel"
+        android:textSize="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    </LinearLayout>
+</LinearLayout>
+
+
+
+
+
+
+
