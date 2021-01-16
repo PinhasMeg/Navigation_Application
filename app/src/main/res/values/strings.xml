@@ -33,4 +33,5 @@
     <string name="travel_days">Travel days</string>
     <string name="send_mail">Send Mail</string>
     <string name="ok">Ok</string>
+    <string name="finish">Finish</string>
 </resources>
