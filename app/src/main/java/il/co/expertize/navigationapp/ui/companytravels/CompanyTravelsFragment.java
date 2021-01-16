@@ -34,17 +34,17 @@ public class CompanyTravelsFragment extends Fragment {
     MainViewModel mViewModel;
     Context context;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         companyTravelsViewModel = new ViewModelProvider(this).get(CompanyTravelsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_companytravels, container, false);
         return root;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CompanyTravelsFragment extends Fragment {
                 adapter.setListener(new CustomListAdapter.CompanyTravelListener() {
                     @Override
                     public void onButtonClicked(int position, View view) {
-                        if (view.getId() == R.id.bt_call) {
+                        if (view.getId() == R.id.Call_User) {
                             String phone = travelArrayList.get(position).getClientPhone();
 
                             if (phone.isEmpty()) {
@@ -77,9 +77,9 @@ public class CompanyTravelsFragment extends Fragment {
                             callIntent.setData(Uri.parse("tel:" + phone));
                             startActivity(callIntent);
                         }
-                        if (view.getId() == R.id.bt_update) {
-                            mViewModel.updateTravel(travelArrayList.get(position));
-                        }
+//                        if (view.getId() == R.id.bt_update) {
+//                            mViewModel.updateTravel(travelArrayList.get(position));
+//                        }
                     }
                 });
 

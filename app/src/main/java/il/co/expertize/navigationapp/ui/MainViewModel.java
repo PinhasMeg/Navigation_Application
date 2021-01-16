@@ -24,6 +24,7 @@ public class MainViewModel extends AndroidViewModel {
         ITravelRepository.NotifyToTravelListListener notifyToTravelListListener = new ITravelRepository.NotifyToTravelListListener() {
             @Override
             public void onTravelsChanged() {
+
                 List<Travel> travelList =repository.getAllTravels();
                 mutableLiveData.setValue(travelList);
             }

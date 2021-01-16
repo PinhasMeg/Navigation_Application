@@ -12,8 +12,8 @@
     <string name="menu_companytravels">Company Travels</string>
     <string name="menu_historytravels">History Travels</string>
     <string name="sign_out">Sign Out</string>
-    <string name="sign_up">Sign up</string>
-    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="welcome">WELCOME !</string>
@@ -31,6 +31,5 @@
     <string name="destination">Destination</string>
     <string name="address">Address</string>
     <string name="travel_days">Travel days</string>
-    <string name="send_mail">Send Mail</string>
     <string name="ok">Ok</string>
 </resources>

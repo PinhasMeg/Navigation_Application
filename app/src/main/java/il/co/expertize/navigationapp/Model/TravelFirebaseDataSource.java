@@ -26,7 +26,7 @@ public  class TravelFirebaseDataSource implements  ITravelDataSource{
     private ITravelDataSource.NotifyToTravelListListener notifyToTravelListListener;
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference travels = firebaseDatabase.getReference("ExistingTravels");
+    DatabaseReference travels = firebaseDatabase.getReference("Travels");
 
     private static TravelFirebaseDataSource instance;
 
