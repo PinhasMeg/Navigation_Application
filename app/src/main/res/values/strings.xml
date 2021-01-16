@@ -32,4 +32,5 @@
     <string name="address">Address</string>
     <string name="travel_days">Travel days</string>
     <string name="ok">Ok</string>
+    <string name="finish">Finish</string>
 </resources>
