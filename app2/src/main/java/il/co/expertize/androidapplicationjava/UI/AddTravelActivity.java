@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -95,12 +97,15 @@ public class AddTravelActivity extends AppCompatActivity {
             travel.setClientName(name.getText().toString());
             travel.setClientEmail(email.getText().toString());
             travel.setClientPhone(phone_number.getText().toString());
-            travel.setNumberOfPassenger(number_of_passengers.getText().toString());
-            travel.setDestination_address(destination_address.getText().toString());
-            travel.setDeparture_date(departureDate);
-            travel.setReturn_date(returnDate);
-            travel.setTravelDepartureLocation(convertFromLocation(makeLocation(departure_address.getText().toString())));
-            travel.setRequesType(Travel.RequestType.sent);
+            travel.setNumOfPassengers(number_of_passengers.getText().toString());
+            travel.setDestinationAddress(destination_address.getText().toString());
+            travel.setTravelDate(departureDate);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                travel.setApplicationDate(LocalDate.now().toString());
+            }
+            travel.setArrivalDate(returnDate);
+            travel.setTravelLocation(convertFromLocation(makeLocation(departure_address.getText().toString())));
+            travel.setRequesType(Travel.RequesType.sent);
             travel.setCompany(CreateHashMapfromString("NO:false"));
             viewModel.addTravel(travel);
         }

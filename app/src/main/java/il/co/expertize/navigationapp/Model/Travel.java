@@ -14,7 +14,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-@Entity (tableName = "travels")
+@Entity(tableName = "travels")
 public class Travel {
 
     @NonNull
@@ -23,7 +23,8 @@ public class Travel {
     private String clientName;
     private String clientPhone;
     private String clientEmail;
-    private  String yossi;
+    private String numOfPassengers;
+    private String applicationDate;
 
     @TypeConverters(UserLocationConverter.class)
     private UserLocation travelLocation;
@@ -41,10 +42,8 @@ public class Travel {
     private HashMap<String, Boolean> company;
 
 
-
     public Travel() {
     }
-
 
 
     @NonNull
@@ -55,6 +54,7 @@ public class Travel {
     public void setTravelId(@NonNull String travelId) {
         this.travelId = travelId;
     }
+
 
     public String getClientName() {
         return clientName;
@@ -104,6 +104,15 @@ public class Travel {
         this.arrivalDate = arrivalDate;
     }
 
+    public String getApplicationDate() {
+        return applicationDate;
+    }
+
+    public void setApplicationDate(String applicationDate) {
+        this.applicationDate = applicationDate;
+    }
+
+
     public UserLocation getTravelLocation() {
         return travelLocation;
     }
@@ -120,14 +129,13 @@ public class Travel {
         this.requesType = requesType;
     }
 
-    public String getYossi() {
-        return yossi;
+    public String getNumOfPassengers() {
+        return numOfPassengers;
     }
 
-    public void setYossi(String yossi) {
-        this.yossi = yossi;
+    public void setNumOfPassengers(String numOfPassengers) {
+        this.numOfPassengers = numOfPassengers;
     }
-
 
     public static class DateConverter {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -144,13 +152,14 @@ public class Travel {
     }
 
 
-
     public enum RequestType {
         sent(0), accepted(1), run(2), close(3), paid(4);
         private final Integer code;
+
         RequestType(Integer value) {
             this.code = value;
         }
+
         public Integer getCode() {
             return code;
         }
@@ -162,6 +171,7 @@ public class Travel {
                     return ds;
             return null;
         }
+
         @TypeConverter
         public static Integer getTypeInt(RequestType requestType) {
             if (requestType != null)

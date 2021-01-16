@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,12 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import il.co.expertize.navigationapp.Adapters.CustomListAdapter;
+import il.co.expertize.navigationapp.Adapters.CustomListAdapterRegisteredTravels;
 import il.co.expertize.navigationapp.Model.Travel;
 import il.co.expertize.navigationapp.R;
 import il.co.expertize.navigationapp.ui.MainViewModel;
@@ -39,6 +36,12 @@ public class CompanyTravelsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context=context;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class CompanyTravelsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        System.out.println( "onViewCreated() called");
         super.onViewCreated(view, savedInstanceState);
         itemsListView  = (ListView)view.findViewById(R.id.list_view_items_companytravels);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -59,10 +63,10 @@ public class CompanyTravelsFragment extends Fragment {
                 ArrayList<Travel> travelArrayList = new ArrayList<Travel>(travels);
 
                 //create adapter object
-                CustomListAdapter adapter = new CustomListAdapter(context, travelArrayList);
+                CustomListAdapterRegisteredTravels adapter = new CustomListAdapterRegisteredTravels(context, travelArrayList);
 
 
-                adapter.setListener(new CustomListAdapter.CompanyTravelListener() {
+                adapter.setListener(new CustomListAdapterRegisteredTravels.CompanyTravelListener() {
                     @Override
                     public void onButtonClicked(int position, View view) {
                         if (view.getId() == R.id.Call_User) {

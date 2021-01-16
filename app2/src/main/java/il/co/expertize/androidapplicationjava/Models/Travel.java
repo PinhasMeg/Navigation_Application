@@ -16,138 +16,182 @@ public class Travel {
     private String clientName;
     private String clientPhone;
     private String clientEmail;
-    private String numberOfPassenger;
+    private String numOfPassengers;
     private HashMap<String, Boolean> company;
     //@TypeConverters(UserLocationConverter.class)
-    private UserLocation travelDepartureLocation;
-    private String departure_address;
-    private String destination_address;
-    //@TypeConverters(RequestType.class)
-    private static RequestType request_type;
+    private UserLocation travelLocation;
+    private String departureAddress;
+    private String destinationAddress;
+    //@TypeConverters(RequesType.class)
+    private static RequesType requesType;
     //@TypeConverters(DateConverter.class)
-    private Date departure_date;
+    private Date travelDate;
     //@TypeConverters(DateConverter.class)
-    private Date return_date;
-
+    private Date arrivalDate;
+    private String applicationDate;
 
 // region getters and setters
-    public String getDeparture_address() {
-        return departure_address;
+
+    public String getApplicationDate() {
+        return applicationDate;
     }
-    public void setDeparture_address(String departure_address) {
-        this.departure_address = departure_address;
+
+    public void setApplicationDate(String applicationDate) {
+        this.applicationDate = applicationDate;
     }
-    public String getDestination_address() {
-        return destination_address;
+
+    public String getDepartureAddress() {
+        return departureAddress;
     }
-    public void setDestination_address(String destination_address) {
-        this.destination_address = destination_address;
+
+    public void setDepartureAddress(String departureAddress) {
+        this.departureAddress = departureAddress;
     }
+
+    public String getDestinationAddress() {
+        return destinationAddress;
+    }
+
+    public void setDestinationAddress(String destinationAddress) {
+        this.destinationAddress = destinationAddress;
+    }
+
     public String getTravelId() {
         return travelId;
     }
-    public void setTravelId(String travelId) { this.travelId = travelId;}
-    public UserLocation getTravelDepartureLocation() {
-        return travelDepartureLocation;
+
+    public void setTravelId(String travelId) {
+        this.travelId = travelId;
     }
-    public void setTravelDepartureLocation(UserLocation travelLocation) {
-        this.travelDepartureLocation = travelLocation;
+
+    public UserLocation getTravelLocation() {
+        return travelLocation;
     }
-    public RequestType getRequesType() {
-        return request_type;
+
+    public void setTravelLocation(UserLocation travelLocation) {
+        this.travelLocation = travelLocation;
     }
-    public void setRequesType(RequestType requesType) {
-        this.request_type = requesType;
+
+    public RequesType getRequesType() {
+        return requesType;
     }
-    public Date getDeparture_date() {
-        return departure_date;
+
+    public void setRequesType(RequesType requesType) {
+        this.requesType = requesType;
     }
-    public void setDeparture_date(Date travelDate) {
-        this.departure_date = travelDate;
+
+    public Date getTravelDate() {
+        return travelDate;
     }
-    public Date getReturn_date() {
-        return return_date;
+
+    public void setTravelDate(Date travelDate) {
+        this.travelDate = travelDate;
     }
-    public void setReturn_date(Date return_date) {
-        this.return_date = return_date;
+
+    public Date getArrivalDate() {
+        return arrivalDate;
     }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
     public HashMap<String, Boolean> getCompany() {
         return company;
     }
+
     public void setCompany(HashMap<String, Boolean> company) {
         this.company = company;
     }
+
     public String getClientName() {
         return clientName;
     }
+
     public void setClientName(String clientName) {
         this.clientName = clientName;
     }
+
     public String getClientPhone() {
         return clientPhone;
     }
+
     public void setClientPhone(String clientPhone) {
         this.clientPhone = clientPhone;
     }
+
     public String getClientEmail() {
         return clientEmail;
     }
+
     public void setClientEmail(String clientEmail) {
         this.clientEmail = clientEmail;
     }
-    public String getNumberOfPassenger() {
-        return numberOfPassenger;
+
+    public String getNumOfPassengers() {
+        return numOfPassengers;
     }
-    public void setNumberOfPassenger(String numberOfPassenger) {
-        this.numberOfPassenger = numberOfPassenger;
+
+    public void setNumOfPassengers(String numOfPassengers) {
+        this.numOfPassengers = numOfPassengers;
     }
     // endregion
 
 
-    public Travel() {}
+    public Travel() {
+    }
 
     public static class DateConverter {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
+
         //@TypeConverter
         public Date fromTimestamp(String date) throws ParseException {
             return (date == null ? null : format.parse(date));
         }
+
         //@TypeConverter
         public String dateToTimestamp(Date date) {
             return date == null ? null : format.format(date);
         }
     }
 
-    public enum RequestType {
+    public enum RequesType {
         sent(0), accepted(1), run(2), close(3), paid(4);
         private final Integer code;
-        RequestType(Integer value) {this.code = value;}
-        public Integer getCode() {return code;}
+
+        RequesType(Integer value) {
+            this.code = value;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
         //@TypeConverter
-        public static RequestType getType(Integer numeral) {
-            for (RequestType ds : values())
+        public static RequesType getType(Integer numeral) {
+            for (RequesType ds : values())
                 if (ds.code.equals(numeral))
                     return ds;
             return null;
         }
+
         //@TypeConverter
-        public static Integer getTypeInt(RequestType requestType) {
-            if (requestType != null)
-                return requestType.code;
+        public static Integer getTypeInt(RequesType requesType) {
+            if (requesType != null)
+                return requesType.code;
             return null;
         }
 
         @NonNull
         @Override
         public String toString() {
-            return request_type.toString();
+            return requesType.toString();
         }
     }
 
     public static class CompanyConverter {
         //@TypeConverter
-        public static HashMap<String, Boolean> CreateHashMapfromString(String value)
-        {
+        public static HashMap<String, Boolean> CreateHashMapfromString(String value) {
             if (value == null || value.isEmpty())
                 return null;
             String[] mapString = value.split(","); //split map into array of (string,boolean) strings
