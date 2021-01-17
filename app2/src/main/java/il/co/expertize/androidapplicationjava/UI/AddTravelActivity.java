@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -51,12 +52,12 @@ public class AddTravelActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         name = (EditText) findViewById(R.id.name);
         email = (EditText) findViewById(R.id.email);
-        phone_number=(EditText) findViewById(R.id.phone) ;
-        departure_address=(EditText) findViewById(R.id.DepartureAddress);
-        destination_address=(EditText) findViewById(R.id.DestinationAddress);
-        number_of_passengers=(EditText) findViewById(R.id.numOfPassengers);
-        departure_date= (DatePicker) findViewById(R.id.DepartureDate);
-        return_date= (DatePicker) findViewById(R.id.ReturnDate);
+        phone_number = (EditText) findViewById(R.id.phone);
+        departure_address = (EditText) findViewById(R.id.DepartureAddress);
+        destination_address = (EditText) findViewById(R.id.DestinationAddress);
+        number_of_passengers = (EditText) findViewById(R.id.numOfPassengers);
+        departure_date = (DatePicker) findViewById(R.id.DepartureDate);
+        return_date = (DatePicker) findViewById(R.id.ReturnDate);
 
         viewModel = new ViewModelProvider(this).get(TravelViewModel.class);
 
@@ -72,26 +73,36 @@ public class AddTravelActivity extends AppCompatActivity {
                     number_of_passengers.setText("");
                     destination_address.setText("");
                     departure_address.setText("");
-                }
-                else PrintColorToast(getApplicationContext(),"Data not entered properly", Color.RED);
+                } else
+                    PrintColorToast(getApplicationContext(), "Data not entered properly", Color.RED);
             }
         });
     }
 
     public void SendRequest(View view) {
-        Date departureDate = new Date(departure_date.getYear(),departure_date.getMonth(),departure_date.getDayOfMonth());
-        Date returnDate = new Date(return_date.getYear(),return_date.getMonth(),return_date.getDayOfMonth());
-        if (name.getText().toString().isEmpty() || email.getText().toString().isEmpty() ||
-        phone_number.getText().toString().isEmpty() || number_of_passengers.getText().toString().isEmpty()||
-        departure_address.getText().toString().isEmpty()|| destination_address.getText().toString().isEmpty())
-        {
-            PrintColorToast(getApplicationContext(),"Please fill all the information",Color.RED);
-        }
-        else if (!isNumeric(phone_number.getText().toString())||!isNumeric(number_of_passengers.getText().toString()))
-            PrintColorToast(getApplicationContext(),"Please enter Numbers",Color.RED);
 
-        else if(returnDate.before(departureDate))
-            PrintColorToast(getApplicationContext(),"Please enter return date later than the departure date",Color.RED);
+        LocalDate returnDate = null, departureDate = null, applicationDate = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            applicationDate = LocalDate.now();
+            returnDate = LocalDate.of(return_date.getYear(), return_date.getMonth() + 1, return_date.getDayOfMonth());
+            departureDate = LocalDate.of(departure_date.getYear(), departure_date.getMonth() + 1, departure_date.getDayOfMonth());
+            if (returnDate.isBefore(departureDate)) {
+                PrintColorToast(getApplicationContext(), "Please enter return date later than the departure date", Color.RED);
+                return;
+            } else if (departureDate.isBefore(LocalDate.now())) {
+                PrintColorToast(getApplicationContext(), "We cannot enter departure date earlier than the current day!", Color.RED);
+                return;
+            }
+        }
+
+
+        if (name.getText().toString().isEmpty() || email.getText().toString().isEmpty() ||
+                phone_number.getText().toString().isEmpty() || number_of_passengers.getText().toString().isEmpty() ||
+                departure_address.getText().toString().isEmpty() || destination_address.getText().toString().isEmpty()) {
+            PrintColorToast(getApplicationContext(), "Please fill all the information", Color.RED);
+        } else if (!isNumeric(phone_number.getText().toString()) || !isNumeric(number_of_passengers.getText().toString()))
+            PrintColorToast(getApplicationContext(), "Please enter Numbers", Color.RED);
+
         else {
             Travel travel = new Travel();
             travel.setClientName(name.getText().toString());
@@ -99,11 +110,9 @@ public class AddTravelActivity extends AppCompatActivity {
             travel.setClientPhone(phone_number.getText().toString());
             travel.setNumOfPassengers(number_of_passengers.getText().toString());
             travel.setDestinationAddress(destination_address.getText().toString());
-            travel.setTravelDate(departureDate);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                travel.setApplicationDate(LocalDate.now().toString());
-            }
-            travel.setArrivalDate(returnDate);
+            travel.setTravelDate(departureDate.toString());
+            travel.setApplicationDate(applicationDate.toString());
+            travel.setArrivalDate(returnDate.toString());
             travel.setTravelLocation(convertFromLocation(makeLocation(departure_address.getText().toString())));
             travel.setRequesType(Travel.RequesType.sent);
             travel.setCompany(CreateHashMapfromString("NO:false"));
@@ -111,10 +120,9 @@ public class AddTravelActivity extends AppCompatActivity {
         }
     }
 
-    public Location makeLocation(String address)
-    {
+    public Location makeLocation(String address) {
         Geocoder geocoder = new Geocoder(this);
-        Location travelLocation= new Location("travelLocation");
+        Location travelLocation = new Location("travelLocation");
         try {
             List<Address> list = geocoder.getFromLocationName(address, 1);
             if (!list.isEmpty()) {
@@ -122,10 +130,10 @@ public class AddTravelActivity extends AppCompatActivity {
                 travelLocation.setLatitude(temp.getLatitude());
                 travelLocation.setLongitude(temp.getLongitude());
             } else {
-                PrintColorToast(getApplicationContext(),"Unable to understand address",Color.RED);
+                PrintColorToast(getApplicationContext(), "Unable to understand address", Color.RED);
             }
         } catch (IOException e) {
-            PrintColorToast(getApplicationContext(),"Unable to understand address. Check Internet connection.",Color.RED);
+            PrintColorToast(getApplicationContext(), "Unable to understand address. Check Internet connection.", Color.RED);
         }
         return travelLocation;
     }

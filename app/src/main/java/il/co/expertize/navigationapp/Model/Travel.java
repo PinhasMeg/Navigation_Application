@@ -35,10 +35,10 @@ public class Travel {
     private RequestType requesType;
 
     @TypeConverters(DateConverter.class)
-    private Date travelDate;
+    private String travelDate;
 
     @TypeConverters(DateConverter.class)
-    private Date arrivalDate;
+    private String arrivalDate;
 
     @TypeConverters(CompanyConverter.class)
     private HashMap<String, Boolean> company;
@@ -106,19 +106,19 @@ public class Travel {
         this.company = company;
     }
 
-    public Date getTravelDate() {
+    public String getTravelDate() {
         return travelDate;
     }
 
-    public void setTravelDate(Date travelDate) {
+    public void setTravelDate(String travelDate) {
         this.travelDate = travelDate;
     }
 
-    public Date getArrivalDate() {
+    public String getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
+    public void setArrivalDate(String arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 

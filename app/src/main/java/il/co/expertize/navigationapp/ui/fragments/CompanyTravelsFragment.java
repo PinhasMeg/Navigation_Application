@@ -46,8 +46,7 @@ public class CompanyTravelsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_companytravels, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_companytravels, container, false);
     }
 
     @Override

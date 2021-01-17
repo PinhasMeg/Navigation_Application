@@ -10,8 +10,15 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import il.co.expertize.navigationapp.Model.Travel;
 import il.co.expertize.navigationapp.R;
@@ -30,8 +37,8 @@ public class CustomListAdapterHistoryTravels extends BaseAdapter {
         void onButtonClicked(int position, View view);
     }
 
-    public void setListener(CustomListAdapterHistoryTravels.CompanyTravelListener listener){
-        this.listener=listener;
+    public void setListener(CustomListAdapterHistoryTravels.CompanyTravelListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -58,23 +65,25 @@ public class CustomListAdapterHistoryTravels extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.rowitem_historytravels, parent, false);
             viewHolder = new CustomListAdapterHistoryTravels.ViewHolder(convertView);
             convertView.setTag(viewHolder);
-        } else
-        {
+        } else {
             viewHolder = (CustomListAdapterHistoryTravels.ViewHolder) convertView.getTag();
         }
 
         Travel currentItem = (Travel) getItem(position);
         viewHolder.clientName.setText(currentItem.getClientName());
-        //viewHolder.totalDaysOfTravel.setText(currentItem.getArrivalDate().getDate()-currentItem.getTravelDate().getDate());
+        Period periodBetween = Period.between(LocalDate.parse(currentItem.getTravelDate()), LocalDate.parse(currentItem.getArrivalDate()));
+        String period = periodBetween.getYears()+ " years, " + periodBetween.getMonths()+ " months, " + periodBetween.getDays()+ " days";
+        viewHolder.totalDaysOfTravel.setText(period);
 
-//        //viewHolder.call.setTag(R.integer.call_view, convertView);
-//        viewHolder.hireSociety.setTag(R.integer.hireSociety_pos, position);
-//        viewHolder.hireSociety.setOnClickListener(new View.OnClickListener() {
+
+//       //viewHolder.sendEmail.setTag(R.integer.call_view, convertView);
+//        viewHolder.sendEmail.setTag(R.integer.hireSociety_pos, position);
+//        viewHolder.sendEmail.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //
 //                //    View tempview = (View) viewHolder.call.getTag(R.integer.call_view);
-//                Integer pos = (Integer) viewHolder.hireSociety.getTag(R.integer.hireSociety_pos);
+//                Integer pos = (Integer) viewHolder.sendEmail.getTag(R.integer.hireSociety_pos);
 //                if (listener!=null)
 //                    listener.onButtonClicked(pos,view);
 //            }
@@ -94,18 +103,6 @@ public class CustomListAdapterHistoryTravels extends BaseAdapter {
 //            }
 //        });
 //
-//        //  viewHolder.update.setTag(R.integer.update_view, convertView);
-//        viewHolder.finishTravel.setTag(R.integer.finishTravel_pos, position);
-//        viewHolder.finishTravel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
-//                Integer pos = (Integer) viewHolder.finishTravel.getTag(R.integer.finishTravel_pos);
-//                if (listener!=null)
-//                    listener.onButtonClicked(pos,view);
-//            }
-//        });
 
         return convertView;
     }
@@ -118,11 +115,11 @@ public class CustomListAdapterHistoryTravels extends BaseAdapter {
         Button paidTravels;
 
         public ViewHolder(View view) {
-            clientName = (TextView)view.findViewById(R.id.clientName);
+            clientName = (TextView) view.findViewById(R.id.clientName);
             totalDaysOfTravel = (TextView) view.findViewById(R.id.travel_days);
 
-            sendEmail=(Button)view.findViewById(R.id.send_mail_society);
-            paidTravels=(Button)view.findViewById(R.id.validate_after_payment);
+            sendEmail = (Button) view.findViewById(R.id.send_mail_society);
+            paidTravels = (Button) view.findViewById(R.id.validate_after_payment);
         }
     }
 }
