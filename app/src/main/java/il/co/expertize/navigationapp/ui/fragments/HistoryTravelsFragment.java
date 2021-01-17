@@ -64,21 +64,21 @@ public class HistoryTravelsFragment extends Fragment {
                 adapter.setListener(new CustomListAdapterHistoryTravels.CompanyTravelListener() {
                     @Override
                     public void onButtonClicked(int position, View view) {
-                        if (view.getId() == R.id.call_User) {
-                            String phone = travelArrayList.get(position).getClientPhone();
-
-                            if (phone.isEmpty()) {
-                                Toast.makeText(getContext(), "no phone number exist", Toast.LENGTH_LONG).show();
-                            } else {
-
-                            }
-                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                            callIntent.setData(Uri.parse("tel:" + phone));
-                            startActivity(callIntent);
+                        if (view.getId() == R.id.send_mail_society) {
+//                            String phone = travelArrayList.get(position).getClientPhone();
+//
+//                            if (phone.isEmpty()) {
+//                                Toast.makeText(getContext(), "no phone number exist", Toast.LENGTH_LONG).show();
+//                            } else {
+//
+//                            }
+//                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+//                            callIntent.setData(Uri.parse("tel:" + phone));
+//                            startActivity(callIntent);
                         }
-//                        if (view.getId() == R.id.bt_update) {
-//                            mViewModel.updateTravel(travelArrayList.get(position));
-//                        }
+                        if (view.getId() == R.id.validate_after_payment) {
+                            //mViewModel.updateTravel(travelArrayList.get(position));
+                        }
                     }
                 });
 

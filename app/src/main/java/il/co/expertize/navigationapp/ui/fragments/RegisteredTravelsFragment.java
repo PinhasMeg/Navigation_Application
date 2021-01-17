@@ -64,21 +64,24 @@ public class RegisteredTravelsFragment extends Fragment {
                 adapter.setListener(new CustomListAdapterRegisteredTravels.CompanyTravelListener() {
                     @Override
                     public void onButtonClicked(int position, View view) {
-                        if (view.getId() == R.id.call_User) {
-                            String phone = travelArrayList.get(position).getClientPhone();
-
-                            if (phone.isEmpty()) {
-                                Toast.makeText(getContext(), "no phone number exist", Toast.LENGTH_LONG).show();
-                            } else {
-
-                            }
-                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                            callIntent.setData(Uri.parse("tel:" + phone));
-                            startActivity(callIntent);
+                        if (view.getId() == R.id.accepted_travel) {
+//                            String phone = travelArrayList.get(position).getClientPhone();
+//
+//                            if (phone.isEmpty()) {
+//                                Toast.makeText(getContext(), "no phone number exist", Toast.LENGTH_LONG).show();
+//                            } else {
+//
+//                            }
+//                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+//                            callIntent.setData(Uri.parse("tel:" + phone));
+//                            startActivity(callIntent);
                         }
-//                        if (view.getId() == R.id.bt_update) {
-//                            mViewModel.updateTravel(travelArrayList.get(position));
-//                        }
+                        if (view.getId() == R.id.travel_start) {
+                         //   mViewModel.updateTravel(travelArrayList.get(position));
+                        }
+                        if (view.getId() == R.id.travel_finish) {
+                            //   mViewModel.updateTravel(travelArrayList.get(position));
+                        }
                     }
                 });
 

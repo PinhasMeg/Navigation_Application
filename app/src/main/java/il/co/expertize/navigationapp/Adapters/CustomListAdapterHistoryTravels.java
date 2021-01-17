@@ -76,33 +76,33 @@ public class CustomListAdapterHistoryTravels extends BaseAdapter {
         viewHolder.totalDaysOfTravel.setText(period);
 
 
-//       //viewHolder.sendEmail.setTag(R.integer.call_view, convertView);
-//        viewHolder.sendEmail.setTag(R.integer.hireSociety_pos, position);
-//        viewHolder.sendEmail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //    View tempview = (View) viewHolder.call.getTag(R.integer.call_view);
-//                Integer pos = (Integer) viewHolder.sendEmail.getTag(R.integer.hireSociety_pos);
-//                if (listener!=null)
-//                    listener.onButtonClicked(pos,view);
-//            }
-//        });
-//
-//
-//        //  viewHolder.update.setTag(R.integer.update_view, convertView);
-//        viewHolder.startTravel.setTag(R.integer.startTravel_pos, position);
-//        viewHolder.startTravel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
-//                Integer pos = (Integer) viewHolder.startTravel.getTag(R.integer.startTravel_pos);
-//                if (listener!=null)
-//                    listener.onButtonClicked(pos,view);
-//            }
-//        });
-//
+       //viewHolder.sendEmail.setTag(R.integer.call_view, convertView);
+        viewHolder.paidTravels.setTag(R.integer.paidTravels_pos, position);
+        viewHolder.paidTravels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //    View tempview = (View) viewHolder.call.getTag(R.integer.call_view);
+                Integer pos = (Integer) viewHolder.paidTravels.getTag(R.integer.paidTravels_pos);
+                if (listener!=null)
+                    listener.onButtonClicked(pos,view);
+            }
+        });
+
+
+        //  viewHolder.update.setTag(R.integer.update_view, convertView);
+        viewHolder.sendEmail.setTag(R.integer.sendEmail_pos, position);
+        viewHolder.sendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
+                Integer pos = (Integer) viewHolder.sendEmail.getTag(R.integer.sendEmail_pos);
+                if (listener!=null)
+                    listener.onButtonClicked(pos,view);
+            }
+        });
+
 
         return convertView;
     }

@@ -68,45 +68,45 @@ public class CustomListAdapterCompanyTravels extends BaseAdapter {
         viewHolder.travelLocation.setText(Travel.UserLocationConverter.asString(currentItem.getTravelLocation()));
         viewHolder.destinationAddress.setText(currentItem.getDestinationAddress());
 
-//        //viewHolder.call.setTag(R.integer.call_view, convertView);
-//        viewHolder.hireSociety.setTag(R.integer.hireSociety_pos, position);
-//        viewHolder.hireSociety.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //    View tempview = (View) viewHolder.call.getTag(R.integer.call_view);
-//                Integer pos = (Integer) viewHolder.hireSociety.getTag(R.integer.hireSociety_pos);
-//                if (listener!=null)
-//                    listener.onButtonClicked(pos,view);
-//            }
-//        });
-//
-//
-//        //  viewHolder.update.setTag(R.integer.update_view, convertView);
-//        viewHolder.startTravel.setTag(R.integer.startTravel_pos, position);
-//        viewHolder.startTravel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
-//                Integer pos = (Integer) viewHolder.startTravel.getTag(R.integer.startTravel_pos);
-//                if (listener!=null)
-//                    listener.onButtonClicked(pos,view);
-//            }
-//        });
-//
-//        //  viewHolder.update.setTag(R.integer.update_view, convertView);
-//        viewHolder.finishTravel.setTag(R.integer.finishTravel_pos, position);
-//        viewHolder.finishTravel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
-//                Integer pos = (Integer) viewHolder.finishTravel.getTag(R.integer.finishTravel_pos);
-//                if (listener!=null)
-//                    listener.onButtonClicked(pos,view);
-//            }
-//        });
+        //viewHolder.call.setTag(R.integer.call_view, convertView);
+        viewHolder.takeTravel.setTag(R.integer.taketravel_pos, position);
+        viewHolder.takeTravel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //    View tempview = (View) viewHolder.call.getTag(R.integer.call_view);
+                Integer pos = (Integer) viewHolder.takeTravel.getTag(R.integer.taketravel_pos);
+                if (listener!=null)
+                    listener.onButtonClicked(pos,view);
+            }
+        });
+
+
+        //  viewHolder.update.setTag(R.integer.update_view, convertView);
+        viewHolder.call.setTag(R.integer.call_pos, position);
+        viewHolder.call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
+                Integer pos = (Integer) viewHolder.call.getTag(R.integer.call_pos);
+                if (listener!=null)
+                    listener.onButtonClicked(pos,view);
+            }
+        });
+
+        //  viewHolder.update.setTag(R.integer.update_view, convertView);
+        viewHolder.sendEmail.setTag(R.integer.sendEmail_pos, position);
+        viewHolder.sendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //     View tempview = (View) viewHolder.update.getTag(R.integer.update_view);
+                Integer pos = (Integer) viewHolder.sendEmail.getTag(R.integer.sendEmail_pos);
+                if (listener!=null)
+                    listener.onButtonClicked(pos,view);
+            }
+        });
 
         return convertView;
     }

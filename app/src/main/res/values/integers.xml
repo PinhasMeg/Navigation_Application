@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="taketravel_pos">10</integer>
+    <integer name="call_pos">12</integer>
+    <integer name="sendEmail_pos">14</integer>
+    <integer name="paidTravels_pos">20</integer>
+</resources>

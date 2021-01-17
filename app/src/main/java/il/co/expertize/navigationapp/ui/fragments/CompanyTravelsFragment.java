@@ -78,9 +78,13 @@ public class CompanyTravelsFragment extends Fragment {
                             callIntent.setData(Uri.parse("tel:" + phone));
                             startActivity(callIntent);
                         }
-//                        if (view.getId() == R.id.bt_update) {
+                        if (view.getId() == R.id.send_mail) {
 //                            mViewModel.updateTravel(travelArrayList.get(position));
-//                        }
+                        }
+
+                        if (view.getId() == R.id.validate_travel) {
+//                            mViewModel.updateTravel(travelArrayList.get(position));
+                        }
                     }
                 });
 
