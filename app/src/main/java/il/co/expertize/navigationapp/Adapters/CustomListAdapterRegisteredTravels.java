@@ -66,7 +66,6 @@ public class CustomListAdapterRegisteredTravels extends BaseAdapter {
         }
 
         Travel currentItem = (Travel) getItem(position);
-        viewHolder.clientName.setText(currentItem.getClientName());
         viewHolder.numOfPassengers.setText(currentItem.getNumOfPassengers());
         viewHolder.beginDate.setText(currentItem.getTravelDate().toString());
         viewHolder.endDate.setText(currentItem.getArrivalDate().toString());
@@ -122,9 +121,11 @@ public class CustomListAdapterRegisteredTravels extends BaseAdapter {
         TextView beginDate;
         TextView endDate;
         TextView applicationDate;
+
         Button  hireSociety;
         Button startTravel;
         Button finishTravel;
+
         Spinner companiesSpinner;
 
         public ViewHolder(View view) {
@@ -133,9 +134,11 @@ public class CustomListAdapterRegisteredTravels extends BaseAdapter {
             beginDate = (TextView) view.findViewById(R.id.begin_date);
             endDate = (TextView) view.findViewById(R.id.end_date);
             applicationDate = (TextView) view.findViewById(R.id.application_date);
+
             hireSociety=(Button)view.findViewById(R.id.accepted_travel);
             startTravel=(Button)view.findViewById(R.id.travel_start);
             finishTravel=(Button)view.findViewById(R.id.travel_finish);
+
             companiesSpinner = (Spinner)view.findViewById(R.id.travel_companies_spinner);
         }
     }

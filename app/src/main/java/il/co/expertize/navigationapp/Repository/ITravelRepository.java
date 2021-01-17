@@ -9,6 +9,7 @@ import il.co.expertize.navigationapp.Model.Travel;
 public interface ITravelRepository {
 
     void addTravel(Travel travel);
+    void addRemoveTravel(Travel travel);
     void updateTravel(Travel travel);
     List<Travel> getAllTravels();
     MutableLiveData<Boolean> getIsSuccess();

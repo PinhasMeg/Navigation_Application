@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import il.co.expertize.navigationapp.Model.Travel;
 import il.co.expertize.navigationapp.R;
@@ -63,10 +65,7 @@ public class CustomListAdapterHistoryTravels extends BaseAdapter {
 
         Travel currentItem = (Travel) getItem(position);
         viewHolder.clientName.setText(currentItem.getClientName());
-        viewHolder.numOfPassengers.setText(currentItem.getNumOfPassengers());
-        viewHolder.beginDate.setText(currentItem.getTravelDate().toString());
-        viewHolder.endDate.setText(currentItem.getArrivalDate().toString());
-        viewHolder.applicationDate.setText(currentItem.getApplicationDate());
+        //viewHolder.totalDaysOfTravel.setText(currentItem.getArrivalDate().getDate()-currentItem.getTravelDate().getDate());
 
 //        //viewHolder.call.setTag(R.integer.call_view, convertView);
 //        viewHolder.hireSociety.setTag(R.integer.hireSociety_pos, position);
@@ -114,25 +113,16 @@ public class CustomListAdapterHistoryTravels extends BaseAdapter {
     //ViewHolder inner class
     private static class ViewHolder {
         TextView clientName;
-        TextView numOfPassengers;
-        TextView beginDate;
-        TextView endDate;
-        TextView applicationDate;
-        Button hireSociety;
-        Button startTravel;
-        Button finishTravel;
-        Spinner companiesSpinner;
+        TextView totalDaysOfTravel;
+        Button sendEmail;
+        Button paidTravels;
 
         public ViewHolder(View view) {
             clientName = (TextView)view.findViewById(R.id.clientName);
-            numOfPassengers = (TextView) view.findViewById(R.id.num_of_passengers);
-            beginDate = (TextView) view.findViewById(R.id.begin_date);
-            endDate = (TextView) view.findViewById(R.id.end_date);
-            applicationDate = (TextView) view.findViewById(R.id.application_date);
-            hireSociety=(Button)view.findViewById(R.id.accepted_travel);
-            startTravel=(Button)view.findViewById(R.id.travel_start);
-            finishTravel=(Button)view.findViewById(R.id.travel_finish);
-            companiesSpinner = (Spinner)view.findViewById(R.id.travel_companies_spinner);
+            totalDaysOfTravel = (TextView) view.findViewById(R.id.travel_days);
+
+            sendEmail=(Button)view.findViewById(R.id.send_mail_society);
+            paidTravels=(Button)view.findViewById(R.id.validate_after_payment);
         }
     }
 }

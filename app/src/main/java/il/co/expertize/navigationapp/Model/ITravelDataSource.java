@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ITravelDataSource {
     void addTravel(Travel travel);
+    void addRemoveTravel(Travel travel);
     void updateTravel(Travel travel);
     List<Travel> getAllTravels();
     MutableLiveData<Boolean> getIsSuccess();

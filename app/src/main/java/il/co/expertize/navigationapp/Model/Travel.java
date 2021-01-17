@@ -25,6 +25,8 @@ public class Travel {
     private String clientEmail;
     private String numOfPassengers;
     private String applicationDate;
+    private String departureAddress;
+    private String destinationAddress;
 
     @TypeConverters(UserLocationConverter.class)
     private UserLocation travelLocation;
@@ -55,6 +57,22 @@ public class Travel {
         this.travelId = travelId;
     }
 
+
+    public String getDepartureAddress() {
+        return departureAddress;
+    }
+
+    public void setDepartureAddress(String departureAddress) {
+        this.departureAddress = departureAddress;
+    }
+
+    public String getDestinationAddress() {
+        return destinationAddress;
+    }
+
+    public void setDestinationAddress(String destinationAddress) {
+        this.destinationAddress = destinationAddress;
+    }
 
     public String getClientName() {
         return clientName;
@@ -221,7 +239,7 @@ public class Travel {
         }
 
         @TypeConverter
-        public String asString(UserLocation warehouseUserLocation) {
+        public static String asString(UserLocation warehouseUserLocation) {
             return warehouseUserLocation == null ? "" : warehouseUserLocation.getLat() + " " + warehouseUserLocation.getLon();
         }
     }

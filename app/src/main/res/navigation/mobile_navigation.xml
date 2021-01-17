@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_registeredtravels"
-        android:name="il.co.expertize.navigationapp.ui.registeredtravels.RegisteredTravelsFragment"
+        android:name="il.co.expertize.navigationapp.ui.fragments.RegisteredTravelsFragment"
         android:label="@string/menu_registeredtravels"
         tools:layout="@layout/fragment_registeredtravels" />
 
     <fragment
         android:id="@+id/nav_companytravels"
-        android:name="il.co.expertize.navigationapp.ui.companytravels.CompanyTravelsFragment"
+        android:name="il.co.expertize.navigationapp.ui.fragments.CompanyTravelsFragment"
         android:label="@string/menu_companytravels"
         tools:layout="@layout/fragment_companytravels" />
 
     <fragment
         android:id="@+id/nav_historytravels"
-        android:name="il.co.expertize.navigationapp.ui.historytravels.HistoryTravelsFragment"
+        android:name="il.co.expertize.navigationapp.ui.fragments.HistoryTravelsFragment"
         android:label="@string/menu_historytravels"
         tools:layout="@layout/fragment_historytravels" />
 

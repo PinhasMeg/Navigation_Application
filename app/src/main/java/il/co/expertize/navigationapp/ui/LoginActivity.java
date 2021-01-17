@@ -32,9 +32,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     private EditText edtEmail;
     private EditText edtPassword;
-    public boolean flag = false;
     private static FirebaseAuth mAuth;
-    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

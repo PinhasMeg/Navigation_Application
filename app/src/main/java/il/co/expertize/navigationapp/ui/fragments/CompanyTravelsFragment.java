@@ -1,4 +1,4 @@
-package il.co.expertize.navigationapp.ui.registeredtravels;
+package il.co.expertize.navigationapp.ui.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,57 +16,58 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import il.co.expertize.navigationapp.Adapters.CustomListAdapterRegisteredTravels;
+import il.co.expertize.navigationapp.Adapters.CustomListAdapterCompanyTravels;
 import il.co.expertize.navigationapp.Model.Travel;
 import il.co.expertize.navigationapp.R;
 import il.co.expertize.navigationapp.ui.MainViewModel;
 
-public class RegisteredTravelsFragment extends Fragment {
+public class CompanyTravelsFragment extends Fragment {
 
-    private RegisteredTravelsViewModel registeredTravelsViewModel;
     ListView itemsListView;
     MainViewModel mViewModel;
     Context context;
 
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         this.context=context;
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        registeredTravelsViewModel = new ViewModelProvider(this).get(RegisteredTravelsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_registeredtravels, container, false);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_companytravels, container, false);
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        itemsListView  = (ListView)view.findViewById(R.id.list_view_items_registeredtravels);
+        itemsListView  = (ListView)view.findViewById(R.id.list_view_items_companytravels);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
+        mViewModel.addRemoveTravel();
         mViewModel.getAllTravels().observe(getViewLifecycleOwner(), new Observer<List<Travel>>() {
             @Override
             public void onChanged(List<Travel> travels) {
                 ArrayList<Travel> travelArrayList = new ArrayList<Travel>(travels);
 
                 //create adapter object
-                CustomListAdapterRegisteredTravels adapter = new CustomListAdapterRegisteredTravels(context, travelArrayList);
+                CustomListAdapterCompanyTravels adapter = new CustomListAdapterCompanyTravels(context, travelArrayList);
 
-
-                adapter.setListener(new CustomListAdapterRegisteredTravels.CompanyTravelListener() {
+                adapter.setListener(new CustomListAdapterCompanyTravels.CompanyTravelListener() {
                     @Override
                     public void onButtonClicked(int position, View view) {
-                        if (view.getId() == R.id.Call_User) {
+                        if (view.getId() == R.id.call_User) {
                             String phone = travelArrayList.get(position).getClientPhone();
 
                             if (phone.isEmpty()) {

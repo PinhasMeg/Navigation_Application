@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        //clientEmail = getIntent().getStringExtra("ClientEmail");
         sharedPreferences = getSharedPreferences("USER",MODE_PRIVATE);
         clientEmail = sharedPreferences.getString("Email", "");
         fab.setOnClickListener(new View.OnClickListener() {

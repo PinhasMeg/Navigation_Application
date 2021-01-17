@@ -39,7 +39,6 @@ public class TravelRepository implements ITravelRepository {
             public void onTravelsChanged() {
                 travelList = travelDataSource.getAllTravels();
 
-
                 if (notifyToTravelListListenerRepository != null)
                     notifyToTravelListListenerRepository.onTravelsChanged();
 
@@ -52,6 +51,11 @@ public class TravelRepository implements ITravelRepository {
     @Override
     public void addTravel(Travel travel) {
         travelDataSource.addTravel(travel);
+    }
+
+    @Override
+    public void addRemoveTravel(Travel travel) {
+        travelDataSource.addRemoveTravel(travel);
     }
 
     @Override
