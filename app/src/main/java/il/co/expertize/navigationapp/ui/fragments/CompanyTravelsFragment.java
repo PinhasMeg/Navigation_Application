@@ -1,17 +1,21 @@
 package il.co.expertize.navigationapp.ui.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,6 +29,7 @@ import il.co.expertize.navigationapp.Adapters.CustomListAdapterCompanyTravels;
 import il.co.expertize.navigationapp.Model.Travel;
 import il.co.expertize.navigationapp.R;
 import il.co.expertize.navigationapp.ui.MainViewModel;
+
 
 public class CompanyTravelsFragment extends Fragment {
 
@@ -49,8 +54,19 @@ public class CompanyTravelsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_companytravels, container, false);
     }
 
+
+
+
+
+
+
+
+
+    private  EditText eTo;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        eTo = (EditText) view.findViewById(R.id.edt_email);
         super.onViewCreated(view, savedInstanceState);
         itemsListView  = (ListView)view.findViewById(R.id.list_view_items_companytravels);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -78,12 +94,51 @@ public class CompanyTravelsFragment extends Fragment {
                             callIntent.setData(Uri.parse("tel:" + phone));
                             startActivity(callIntent);
                         }
+
                         if (view.getId() == R.id.send_mail) {
-//                            mViewModel.updateTravel(travelArrayList.get(position));
+                            String mail = travelArrayList.get(position).getClientEmail();
+
+                            if (mail.isEmpty()) {
+                                Toast.makeText(getContext(), "no mail address exist", Toast.LENGTH_LONG).show();
+                            } else {
+                                Intent email = new Intent(Intent.ACTION_SEND);
+                                email.putExtra(Intent.EXTRA_EMAIL, new String[]{eTo.getText().toString() });
+                                email.putExtra(Intent.EXTRA_SUBJECT, "roull");
+                                email.putExtra(Intent.EXTRA_TEXT, "rouli roulou");
+                                email.setType("message/rfc822");
+                                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+
+                            }
                         }
+                        Button btn = (Button) view.findViewById(R.id.validate_travel);
 
                         if (view.getId() == R.id.validate_travel) {
-//                            mViewModel.updateTravel(travelArrayList.get(position));
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                            builder1.setMessage("Are you sure ?");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "Yes",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Toast.makeText(getContext(), "Have a good travel!", Toast.LENGTH_LONG).show();
+                                            btn.setClickable(false);
+                                        }
+                                    });
+
+                            builder1.setNegativeButton(
+                                    "No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+
+
                         }
                     }
                 });
