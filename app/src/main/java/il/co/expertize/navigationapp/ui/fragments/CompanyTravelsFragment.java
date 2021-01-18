@@ -54,19 +54,9 @@ public class CompanyTravelsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_companytravels, container, false);
     }
 
-
-
-
-
-
-
-
-
-    private  EditText eTo;
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        eTo = (EditText) view.findViewById(R.id.edt_email);
+
         super.onViewCreated(view, savedInstanceState);
         itemsListView  = (ListView)view.findViewById(R.id.list_view_items_companytravels);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -97,17 +87,15 @@ public class CompanyTravelsFragment extends Fragment {
 
                         if (view.getId() == R.id.send_mail) {
                             String mail = travelArrayList.get(position).getClientEmail();
-
                             if (mail.isEmpty()) {
                                 Toast.makeText(getContext(), "no mail address exist", Toast.LENGTH_LONG).show();
                             } else {
                                 Intent email = new Intent(Intent.ACTION_SEND);
-                                email.putExtra(Intent.EXTRA_EMAIL, new String[]{eTo.getText().toString() });
+                                email.putExtra(Intent.EXTRA_EMAIL, new String[]{travelArrayList.get(position).getClientEmail() });
                                 email.putExtra(Intent.EXTRA_SUBJECT, "roull");
                                 email.putExtra(Intent.EXTRA_TEXT, "rouli roulou");
                                 email.setType("message/rfc822");
                                 startActivity(Intent.createChooser(email, "Choose an Email client :"));
-
                             }
                         }
                         Button btn = (Button) view.findViewById(R.id.validate_travel);
@@ -136,9 +124,6 @@ public class CompanyTravelsFragment extends Fragment {
 
                             AlertDialog alert11 = builder1.create();
                             alert11.show();
-
-
-
                         }
                     }
                 });
