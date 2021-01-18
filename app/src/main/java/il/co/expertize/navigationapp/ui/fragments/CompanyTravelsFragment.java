@@ -3,6 +3,7 @@ package il.co.expertize.navigationapp.ui.fragments;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -98,7 +99,6 @@ public class CompanyTravelsFragment extends Fragment {
                                 startActivity(Intent.createChooser(email, "Choose an Email client :"));
                             }
                         }
-                        Button btn = (Button) view.findViewById(R.id.validate_travel);
 
                         if (view.getId() == R.id.validate_travel) {
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
@@ -110,7 +110,6 @@ public class CompanyTravelsFragment extends Fragment {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             Toast.makeText(getContext(), "Have a good travel!", Toast.LENGTH_LONG).show();
-                                            btn.setClickable(false);
                                         }
                                     });
 

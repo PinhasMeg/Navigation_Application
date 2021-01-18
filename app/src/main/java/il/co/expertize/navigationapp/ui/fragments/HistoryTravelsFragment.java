@@ -65,16 +65,17 @@ public class HistoryTravelsFragment extends Fragment {
                     @Override
                     public void onButtonClicked(int position, View view) {
                         if (view.getId() == R.id.send_mail_society) {
-//                            String phone = travelArrayList.get(position).getClientPhone();
-//
-//                            if (phone.isEmpty()) {
-//                                Toast.makeText(getContext(), "no phone number exist", Toast.LENGTH_LONG).show();
-//                            } else {
-//
-//                            }
-//                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
-//                            callIntent.setData(Uri.parse("tel:" + phone));
-//                            startActivity(callIntent);
+                            String mail = travelArrayList.get(position).getClientEmail();
+                            if (mail.isEmpty()) {
+                                Toast.makeText(getContext(), "no mail address exist", Toast.LENGTH_LONG).show();
+                            } else {
+                                Intent email = new Intent(Intent.ACTION_SEND);
+                                email.putExtra(Intent.EXTRA_EMAIL, new String[]{travelArrayList.get(position).getClientEmail() }); //todo change email to society email
+                                email.putExtra(Intent.EXTRA_SUBJECT, "roull");
+                                email.putExtra(Intent.EXTRA_TEXT, "rouli roulou");
+                                email.setType("message/rfc822");
+                                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                            }
                         }
                         if (view.getId() == R.id.validate_after_payment) {
                             //mViewModel.updateTravel(travelArrayList.get(position));
