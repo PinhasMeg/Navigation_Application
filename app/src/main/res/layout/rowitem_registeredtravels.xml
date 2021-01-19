@@ -100,7 +100,8 @@
         <Spinner
             android:id="@+id/travel_companies_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/choose_society_between_the_list"/>
     </LinearLayout>
 
     <LinearLayout

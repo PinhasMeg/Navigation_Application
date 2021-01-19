@@ -1,11 +1,13 @@
 package il.co.expertize.navigationapp.ui.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import il.co.expertize.navigationapp.Adapters.CustomListAdapterCompanyTravels;
@@ -79,13 +81,11 @@ public class CompanyTravelsFragment extends Fragment {
                             if (phone.isEmpty()) {
                                 Toast.makeText(getContext(), "no phone number exist", Toast.LENGTH_LONG).show();
                             } else {
-
+                                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                                callIntent.setData(Uri.parse("tel:" + phone));
+                                startActivity(callIntent);
                             }
-                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                            callIntent.setData(Uri.parse("tel:" + phone));
-                            startActivity(callIntent);
                         }
-
                         if (view.getId() == R.id.send_mail) {
                             String mail = travelArrayList.get(position).getClientEmail();
                             if (mail.isEmpty()) {
@@ -93,43 +93,46 @@ public class CompanyTravelsFragment extends Fragment {
                             } else {
                                 Intent email = new Intent(Intent.ACTION_SEND);
                                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{travelArrayList.get(position).getClientEmail() });
-                                email.putExtra(Intent.EXTRA_SUBJECT, "roull");
-                                email.putExtra(Intent.EXTRA_TEXT, "rouli roulou");
+                                email.putExtra(Intent.EXTRA_SUBJECT, "About Travel");
+                                email.putExtra(Intent.EXTRA_TEXT, "Hello, about the travel you need...");
                                 email.setType("message/rfc822");
                                 startActivity(Intent.createChooser(email, "Choose an Email client :"));
                             }
                         }
 
                         if (view.getId() == R.id.validate_travel) {
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                            builder1.setMessage("Are you sure ?");
-                            builder1.setCancelable(true);
+                            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                            final EditText edittext = new EditText(context);
+                            alert.setTitle("Please enter the name of your Society");
+                            alert.setView(edittext);
 
-                            builder1.setPositiveButton(
-                                    "Yes",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            Toast.makeText(getContext(), "Have a good travel!", Toast.LENGTH_LONG).show();
-                                        }
-                                    });
+                            alert.setPositiveButton("Send proposal", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    String societyEmail = edittext.getText().toString();
+                                    if (societyEmail.contains("/")||societyEmail.contains(".")||societyEmail.contains("#")||societyEmail.contains("$")||societyEmail.contains("[")||societyEmail.contains("]"))
+                                        Toast.makeText(getContext(), "Keys must not contain '/', '.', '#', '$', '[', or ']'", Toast.LENGTH_LONG).show();
 
-                            builder1.setNegativeButton(
-                                    "No",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
+                                    else {
+                                        Travel currentTravel = travelArrayList.get(position);
+                                        HashMap<String, Boolean> company = currentTravel.getCompany();
+                                        company.remove("NO");
+                                        company.put(societyEmail, false);
+                                        mViewModel.updateTravel(currentTravel);
+                                        Toast.makeText(getContext(), "Your proposition has been successfully sent. Please wait for the client response.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
 
-                            AlertDialog alert11 = builder1.create();
-                            alert11.show();
+                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {}
+                            });
+
+                            alert.show();
                         }
                     }
                 });
-
                 //set custom adapter as adapter to our list view
                 itemsListView.setAdapter(adapter);
             }});
     }
-
 }

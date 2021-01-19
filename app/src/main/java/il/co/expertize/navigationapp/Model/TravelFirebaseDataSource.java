@@ -97,28 +97,20 @@ public  class TravelFirebaseDataSource implements  ITravelDataSource{
         });
         travels.child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(Void aVoid) {
-                Log.e(TAG, "Travel Removed");
-            }
+            public void onSuccess(Void aVoid) {}
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "Failure removing Travel");
-            }
+            public void onFailure(@NonNull Exception e) {}
         });
     }
 
     public  void removeTravel(String id) {
         travels.child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(Void aVoid) {
-                Log.e(TAG, "Travel Removed");
-            }
+            public void onSuccess(Void aVoid) {}
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "Failure removing Travel");
-            }
+            public void onFailure(@NonNull Exception e) {}
         });
     }
 

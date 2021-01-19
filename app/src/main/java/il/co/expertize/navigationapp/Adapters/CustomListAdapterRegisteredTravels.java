@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import il.co.expertize.navigationapp.Model.Travel;
 import il.co.expertize.navigationapp.R;
@@ -30,11 +34,14 @@ public class CustomListAdapterRegisteredTravels extends BaseAdapter {
 
     public interface CompanyTravelListener {
         void onButtonClicked(int position, View view);
+        void onItemSelected(AdapterView<?> parent, View view,
+                            int pos, long id);
     }
 
     public void setListener(CompanyTravelListener listener){
         this.listener=listener;
     }
+
 
     @Override
     public int getCount() {
@@ -70,6 +77,24 @@ public class CustomListAdapterRegisteredTravels extends BaseAdapter {
         viewHolder.beginDate.setText(currentItem.getTravelDate().toString());
         viewHolder.endDate.setText(currentItem.getArrivalDate().toString());
         viewHolder.applicationDate.setText(currentItem.getApplicationDate());
+
+        ArrayList<String> items = new ArrayList<>(currentItem.getCompany().keySet());
+        viewHolder.companiesSpinner.setAdapter(new ArrayAdapter<>(context, R.layout.support_simple_spinner_dropdown_item, items));
+
+        //viewHolder.call.setTag(R.integer.call_view, convertView);
+        viewHolder.companiesSpinner.setTag(R.integer.companies_spinner, position);
+        viewHolder.companiesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Integer pos = (Integer) viewHolder.companiesSpinner.getTag(R.integer.companies_spinner);
+                if (listener!=null)
+                    listener.onItemSelected(parent,view,pos,id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         //viewHolder.call.setTag(R.integer.call_view, convertView);
         viewHolder.hireSociety.setTag(R.integer.hireSociety_pos, position);

@@ -1,6 +1,8 @@
 package il.co.expertize.navigationapp.ui.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -78,7 +80,29 @@ public class HistoryTravelsFragment extends Fragment {
                             }
                         }
                         if (view.getId() == R.id.validate_after_payment) {
-                            //mViewModel.updateTravel(travelArrayList.get(position));
+                            Travel currentTravel = travelArrayList.get(position);
+                            if (currentTravel.getRequesType() == Travel.RequestType.paid)
+                                Toast.makeText(getContext(), "You already marked the travel as finished!", Toast.LENGTH_LONG).show();
+                            else if (currentTravel.getRequesType() != Travel.RequestType.close)
+                                Toast.makeText(getContext(), "Please wait for close travel of the client.", Toast.LENGTH_LONG).show();
+                            else {
+                                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                                alert.setTitle("Did the company paid commission for the travel?");
+                                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Travel currentTravel = travelArrayList.get(position);
+                                        currentTravel.setRequesType(Travel.RequestType.paid);
+                                        mViewModel.updateTravel(currentTravel);
+                                        Toast.makeText(getContext(), "Great job!", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {}
+                                });
+
+                                alert.show();
+                            }
                         }
                     }
                 });
