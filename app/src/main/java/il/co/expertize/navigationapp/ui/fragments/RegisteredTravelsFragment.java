@@ -65,8 +65,8 @@ public class RegisteredTravelsFragment extends Fragment {
         mViewModel.getAllTravels().observe(getViewLifecycleOwner(), new Observer<List<Travel>>() {
             @Override
             public void onChanged(List<Travel> travels) {
-                ArrayList<Travel> travelArrayList = new ArrayList<>(travels);
-
+                ArrayList<Travel> travelArrayList;
+                travelArrayList = mViewModel.checkTravelsByUser(travels);
 
                 //create adapter object
                 CustomListAdapterRegisteredTravels adapter = new CustomListAdapterRegisteredTravels(context, travelArrayList);

@@ -24,7 +24,7 @@ import il.co.expertize.navigationapp.ui.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String clientEmail;
+    public static String clientEmail;
     private AppBarConfiguration mAppBarConfiguration;
     SharedPreferences sharedPreferences;
 

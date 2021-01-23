@@ -58,4 +58,8 @@ public class MainViewModel extends AndroidViewModel {
         return repository.getIsSuccess();
     }
 
+    public ArrayList<Travel> checkTravelsByUser(List<Travel> travels)
+    {
+        return repository.checkTravelsByUser(travels);
+    }
 }

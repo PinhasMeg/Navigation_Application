@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.MutableLiveData;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import il.co.expertize.navigationapp.Model.HistoryDataSource;
@@ -61,6 +62,11 @@ public class TravelRepository implements ITravelRepository {
     @Override
     public void updateTravel(Travel travel) {
         travelDataSource.updateTravel(travel);
+    }
+
+    @Override
+    public ArrayList<Travel> checkTravelsByUser(List<Travel> travels) {
+        return travelDataSource.checkTravelsByUser(travels);
     }
 
     @Override

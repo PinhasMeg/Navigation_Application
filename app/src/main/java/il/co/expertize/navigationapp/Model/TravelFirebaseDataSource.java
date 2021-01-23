@@ -1,5 +1,6 @@
 package il.co.expertize.navigationapp.Model;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+import static il.co.expertize.navigationapp.MainActivity.clientEmail;
 
 public  class TravelFirebaseDataSource implements  ITravelDataSource{
 
@@ -38,6 +42,7 @@ public  class TravelFirebaseDataSource implements  ITravelDataSource{
 
     private TravelFirebaseDataSource() {
         allTravelsList = new ArrayList<>();
+
         travels.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -127,5 +132,16 @@ public  class TravelFirebaseDataSource implements  ITravelDataSource{
 
     public MutableLiveData<Boolean> getIsSuccess() {
         return isSuccess;
+    }
+
+    @Override
+    public ArrayList<Travel> checkTravelsByUser(List<Travel> travels) {
+
+        ArrayList<Travel> newList= new ArrayList<Travel>();
+        for (Travel travel: travels) {
+            if(travel.getClientEmail() != null && travel.getClientEmail().equals(clientEmail))
+                newList.add(travel);
+        }
+        return newList;
     }
 }
